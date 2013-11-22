@@ -11,7 +11,5 @@ public class SeleniumDriver {
 		// Test SignIn feature
 		if (signIn.testPassed()) System.out.println("SignIn Test passed!");
 		
-		
-		
     }
 }
