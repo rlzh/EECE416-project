@@ -14,8 +14,4 @@ public class SeleniumDriver {
 		
 		
     }
-	
-	public void setUp() {
-		
-	}
 }
