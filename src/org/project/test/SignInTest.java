@@ -15,13 +15,15 @@ public class SignInTest extends BaseTest{
 		
 		super.setUp();
 		
-		WebElement home = driver.findElement(By.linkText("Your Home"));
-		assertNotNull(home);
+		String homeUrl = driver.getCurrentUrl();
+		assertTrue(homeUrl.contains("/u"));
 		
-		WebElement signOut = driver.findElement(By.linkText("Sign Out"));
+		WebElement accountInfo = driver.findElement(By.linkText("nayr3169"));
+		assertNotNull(accountInfo);
+		accountInfo.click();
+		WebElement signOut = driver.findElement(By.className("top_button"));
 		assertNotNull(signOut);
-		
-		
+
 		driver.quit();
 	}
 
