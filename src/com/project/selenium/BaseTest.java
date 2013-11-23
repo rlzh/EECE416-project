@@ -30,16 +30,7 @@ public class BaseTest {
 	}
 	
 	public void createAccount(String username, String password) {
-		WebElement signIn = driver.findElement(By.linkText("Sign In"));
-		signIn.click();
 		
-		WebElement newUsername = driver.findElement(By.id("username"));
-		newUsername.sendKeys(username);
-		WebElement newPassword = driver.findElement(By.id("password"));
-		newPassword.sendKeys(password);
-		
-		WebElement register = driver.findElement(By.id("register"));
-		register.click();
 	}
 
 }
