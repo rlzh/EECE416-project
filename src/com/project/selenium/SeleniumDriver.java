@@ -1,17 +1,36 @@
 package com.project.selenium;
 
-import org.project.test.SignInTest;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 
 
 public class SeleniumDriver {
 	
-	public static void main(String[] args) {
+	private static final String url = "http://www.instapaper.com/";
+	
+	private WebDriver driver;
+	
+	public SeleniumDriver() {
+		driver = new FirefoxDriver();
+		driver = new FirefoxDriver();
+		driver.get(url);
+	}
+	
+	public void logIn() {
+		WebElement element = driver.findElement(By.name("signinForm"));
+		WebElement email = element.findElement(By.name("email"));
+		email.sendKeys("nayr3169@hotmail.com");
+		WebElement password = element.findElement(By.name("password"));
+		password.sendKeys("123456");
 		
-		// Initialize all test
-		BaseTest signIn = new SignInTest();
-		
-		// Test SignIn feature
-		//if (signIn.testPassed()) System.out.println("SignIn Test passed!");
-		
-    }
+		element.submit();
+	}
+	
+	public void close() {
+		driver.close();
+	}
+	
 }
