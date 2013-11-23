@@ -1,5 +1,7 @@
 package com.project.selenium;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,20 +11,27 @@ public class BaseTest {
 	
 	private static final String url = "http://www.instapaper.com/";
 	
-	protected static WebDriver driver;
+	protected WebDriver driver;
 	
+	@BeforeClass
 	public void setUp() {
 		driver = new FirefoxDriver();
 		driver.get(url);
-		
-		WebElement signIn = driver.findElement(By.linkText("Sign In"));
-		signIn.click();
-		WebElement email = driver.findElement(By.id("username"));
+	}
+	
+	public void logIn() {
+		WebElement element = driver.findElement(By.name("signinForm"));
+		WebElement email = element.findElement(By.name("email"));
 		email.sendKeys("nayr3169@hotmail.com");
-		WebElement password = driver.findElement(By.id("password"));
+		WebElement password = element.findElement(By.name("password"));
 		password.sendKeys("123456");
-		WebElement signInBtn = driver.findElement(By.id("log_in"));
-		signInBtn.click();
+		
+		element.submit();
+	}
+	
+	@AfterClass
+	public void closeFirefox() {
+		driver.close();
 	}
 	
 

@@ -1,30 +1,34 @@
 package org.project.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.project.selenium.BaseTest;
 
-
-public class SignInTest extends BaseTest{
+public class SignInTest {
+	
+	WebDriver driver;
+	
+	@Before
+	public void setUp() {
+		
+		driver = new FirefoxDriver();
+		
+	}
 	
 	@Test
-	public void SignInTest() {
+	public void signInTest() {
 		
-		super.setUp();
+		WebElement home = driver.findElement(By.linkText("Your Home"));
+		assertNotNull(home);
 		
-		String homeUrl = driver.getCurrentUrl();
-		assertTrue(homeUrl.contains("/u"));
-		
-		WebElement accountInfo = driver.findElement(By.linkText("nayr3169"));
-		assertNotNull(accountInfo);
-		accountInfo.click();
-		WebElement signOut = driver.findElement(By.className("top_button"));
+		WebElement signOut = driver.findElement(By.linkText("Sign Out"));
 		assertNotNull(signOut);
-
-		driver.quit();
 	}
 
 }
