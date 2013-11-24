@@ -110,7 +110,6 @@ public class UserOrganizeTest extends BaseTest{
 		// add a new article
 		String id = addPage(url, title, summary);
 		
-
 		Actions builder = new Actions(driver);
 		WebElement article = driver.findElement( By.xpath( "//a[@title='" + title +"']" ) );
 		builder.moveToElement(article).perform();
