@@ -21,15 +21,16 @@ public class ReadArticleTest extends BaseTest {
 	
 	@Test
 	public void SimpleReadTest() {
-		WebElement articleLink = driver.findElements( By.className( "title_row" ) )
-										.get(0)
-										.findElement( By.xpath("./a") );
-		String articleUrl = articleLink.getAttribute("href");
-		
-		articleLink.click();
-		
-		assertTrue( driver.getCurrentUrl().equals( articleUrl ) );
 		try {
+			WebElement articleLink = driver.findElements( By.className( "title_row" ) )
+											.get(0)
+											.findElement( By.xpath("./a") );
+			String articleUrl = articleLink.getAttribute("href");
+			
+			articleLink.click();
+			
+			assertTrue( driver.getCurrentUrl().equals( articleUrl ) );
+	
 			CheckPageLayout();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -47,6 +48,9 @@ public class ReadArticleTest extends BaseTest {
 		goToFirstArticle();
 		try {
 			driver.findElement( By.className( "fontOptions" ) ).click();
+			// Tisa font 
+			driver.findElement( By.id("tisaChoice") ).click();
+			assertNotNull( driver.findElement( By.className( "tisamode" ) ) );
 			// Georgia font 
 			driver.findElement( By.id("georgiaChoice") ).click();
 			assertNotNull( driver.findElement( By.className( "georgiamode" ) ) );
@@ -118,18 +122,83 @@ public class ReadArticleTest extends BaseTest {
 	 */
 	@Test
 	public void MarginSizeTest() {
-		
+		goToFirstArticle();
+		try {
+			driver.findElement( By.className( "fontOptions" ) ).click();
+			WebElement incSizeBtn = driver.findElements( By.className( "optIncrease" ) ).get(1);
+			WebElement decSizeBtn = driver.findElements( By.className( "optDecrease" ) ).get(1);
+			// wide mode
+			assertNotNull( driver.findElement( By.xpath( "//body" ) )
+								   .getAttribute("class")
+								   .contains( "widemode" ) );	
+			// medium width mode
+			incSizeBtn.click();
+			assertNotNull( driver.findElement( By.xpath( "//body" ) )
+								   .getAttribute("class")
+								   .contains( "mediumwidthmode" ) );
+			// narrow mode
+			incSizeBtn.click();
+			assertNotNull( driver.findElement( By.xpath( "//body" ) )
+								   .getAttribute("class")
+								   .contains( "narrowmode" ) );			
+			// restore to wide mode
+			for(int i = 0; i < 3; i++) 	{ decSizeBtn.click(); }
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			fail();
+		}
+	}
+	
+	/**
+	 *  test background colors
+	 */
+	@Test
+	public void BackGroundColorTest() {
+		goToFirstArticle();
+		try {
+			driver.findElement( By.className( "fontOptions" ) ).click();
+			
+			// Light background color
+			driver.findElement( By.className("backgroundWhite") ).click();
+			assertNotNull( driver.findElement( By.className( "lightmode" ) ) );
+			// Sepia background color
+			driver.findElement( By.className("backgroundSepia") ).click();
+			assertNotNull( driver.findElement( By.className( "sepiamode" ) ) );
+			// Dark background color
+			driver.findElement( By.className("backgroundDark") ).click();
+			assertNotNull( driver.findElement( By.className( "darkmode" ) ) );
+		} catch (Exception e) {
+			// TODO: handle exception
+			fail();
+		}
+	}
+	/**
+	 *  test going back to original article site
+	 */
+	@Test
+	public void GoToOriginalTest() {
+		goToFirstArticle();
+		try {
+			WebElement originalLink = driver.findElement( By.xpath( "//a[@title='View Original']" ) );
+			String originalUrl = originalLink.getAttribute("href");
+			
+			originalLink.click();
+			
+			assertTrue( driver.getCurrentUrl().equals(originalUrl) );
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			fail();
+		}
 	}
 	
 	// helper function to go to article reading page
 	private void goToFirstArticle() {
-		WebElement articleLink = driver.findElements( By.className( "title_row" ) )
-										.get(0)
-										.findElement( By.xpath("./a") );
-		String articleUrl = articleLink.getAttribute("href");
-		
-		articleLink.click();
-		
+		driver.findElements( By.className( "title_row" ) )
+				.get(0)
+				.findElement( By.xpath("./a") )
+				.click();		
 	}
 	
 	// helper function to verify GUI presence
