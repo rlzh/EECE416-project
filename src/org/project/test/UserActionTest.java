@@ -1,5 +1,5 @@
 package org.project.test;
 
-public class BrowsePageTest {
+public class UserActionTest {
 
 }
