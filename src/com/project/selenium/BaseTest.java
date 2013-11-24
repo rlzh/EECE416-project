@@ -1,27 +1,25 @@
 package com.project.selenium;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.openqa.selenium.By;
+import org.junit.After;
+import org.junit.Before;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BaseTest {
 	
-	protected static WebDriver driver;
+	protected WebDriver driver;
 	protected static final String url = "http://www.instapaper.com/";
 	protected static final String username = "dummy@gmail.com";
 	protected static final String password = "123456";
 	
-	@BeforeClass
-	public static void setUp() {
+	@Before
+	public void setUp() {
 		driver = new FirefoxDriver();
 		driver.get(url);
 	}
 	
-	@AfterClass
-	public static void closeFirefox() {
+	@After
+	public void closeFirefox() {
 		driver.close();
 	}
 	
