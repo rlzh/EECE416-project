@@ -1,4 +1,4 @@
-Feature: Organizing Articles
+Feature: Liking Articles
     In order to organize my articles
     As a user who added a lot of articles
     I want to like an article

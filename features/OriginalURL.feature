@@ -1,4 +1,4 @@
-Feature: Store Original URL
+Feature: Original URL
     In order to go back to the original website
     As a user who wants to read more from the same website
     I want to go back to the original website I got the article from
