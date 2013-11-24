@@ -37,13 +37,16 @@ public class BaseTest {
 
 		WebElement register = driver.findElement(By.id("log_in"));
 		register.click();
+		
+		// check page layout
+		PageLayout();
 	}
 	
 	public void createAccount(String username, String password) {
 		
 	}
 	
-	public void PageLayout() {
+	private void PageLayout() {
 		// check for site header
 		assertNotNull( driver.findElement( By.id( "header" ) ) );
 		// check for navigation side bar
