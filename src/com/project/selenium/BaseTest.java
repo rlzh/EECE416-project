@@ -48,16 +48,13 @@ public class BaseTest {
 		// check for navigation side bar
 		assertNotNull( driver.findElement( By.id( "side_column" ) ) );
 		// check for buttons in navigation side bar
-		assertNotNull( driver.findElement( By.id( "user_nav" ) ) );
-		assertNotNull( driver.findElement( By.id( "like_nav" ) ) );
-		assertNotNull( driver.findElement( By.id( "arhcive_nav" ) ) );
+		assertNotNull( driver.findElement( By.id( "unread_nav" ) ) );
+		assertNotNull( driver.findElement( By.id( "liked_nav" ) ) );
+		assertNotNull( driver.findElement( By.id( "archive_nav" ) ) );
 		assertNotNull( driver.findElement( By.id( "search_box" ) ) );
 		assertNotNull( driver.findElement( By.id( "browse_nav" ) ) );
 		assertNotNull( driver.findElement( By.id( "save_nav" ) ) );
 		assertNotNull( driver.findElement( By.id( "user_nav" ) ) );
-		assertNotNull( driver.findElement( By.id( "like_nav" ) ) );
-		assertNotNull( driver.findElement( By.id( "like_nav" ) ) );
-		assertNotNull( driver.findElement( By.id( "like_nav" ) ) );
 		// check for foot in navigation side bar
 		assertNotNull( driver.findElement( By.linkText( "Help" ) ) );
 		assertNotNull( driver.findElement( By.linkText( "Apps" ) ) );
