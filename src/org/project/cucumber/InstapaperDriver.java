@@ -1,5 +1,7 @@
 package org.project.cucumber;
 
+import static org.junit.Assert.assertEquals;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -27,6 +29,33 @@ public class InstapaperDriver extends FirefoxDriver {
 
 		WebElement signInBtn = findElement(By.id("log_in"));
 		signInBtn.click();
+	}
+	
+	 /** Helper function to add new page into the account
+	 * @param url
+	 * @return the id of the article added
+	 */
+	public String addPage(String url, String title, String summary) {
+		WebElement action = findElement(By.xpath("//a[@title='Actions']"));
+		action.click();
+		
+		WebElement add = findElement(By.linkText("Add Article"));
+		add.click();
+		
+		WebElement pageTitle = findElement(By.className("page_title"));
+		assertEquals(pageTitle.getText(), "Add Article");
+		
+		findElement(By.id("bookmarkurl")).sendKeys(url);
+		findElement(By.id("bookmarktitle")).sendKeys(title);
+		findElement(By.id("bookmarkselection")).sendKeys(summary);
+		
+		findElement(By.id("submit")).submit();
+		
+		WebElement article = findElement(By.xpath("//a[@title='"+ title + "']"));
+		String link = article.getAttribute("href");
+		String[] split = link.split("/");
+		
+		return split[split.length-1];
 	}
 	
 
