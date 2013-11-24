@@ -119,20 +119,12 @@ public class UserOrganizeTest extends BaseTest{
 
 		WebElement folder = driver.findElements( By.className( "moveTo" ) ).get(0);
 		String folderName = folder.getText();
-		//System.out.println(folderName);
 		
 		folder.click();
 
-		
 		driver.findElement( By.id( "folder_toggle" ) ).click();
 		driver.findElement( By.linkText( folderName ) ).click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		driver.findElement( By.linkText( folderName ) ).click();
+		driver.findElement( By.linkText( folderName ) ).click(); // <----- BUG: NEED 2 CLICKS FOR LINK TO WORK
 
 		assertNotNull( driver.findElement( By.linkText( title ) ) );
 		
