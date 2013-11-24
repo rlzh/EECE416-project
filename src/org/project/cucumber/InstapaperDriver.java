@@ -20,7 +20,7 @@ public class InstapaperDriver extends FirefoxDriver {
 	}
 	
 	public String getUrl() {
-		return this.url;
+		return url;
 	}
 	
 	public void logIn() {

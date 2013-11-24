@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.project.cucumber.InstapaperDriver;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -20,7 +19,7 @@ public class LikeArticleTest {
 	
 	@Given("^I added Engadget into my account$")
 	public void I_added_Engadget_into_my_account() throws Throwable {
-		id =driver.addPage(url, title, summary);
+		id = driver.addPage(url, title, summary);
 	}
 
 	@When("^I click the Heart icon$")
@@ -36,8 +35,9 @@ public class LikeArticleTest {
 
 	@Then("^Engadget should be liked and shows up in my Liked page$")
 	public void Engadget_should_be_liked_and_shows_up_in_my_Liked_page() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+		driver.findElement(By.id("liked_nav")).click();
+		driver.removePage(id, title);
+		driver.quit();
 	}
 
 }
