@@ -39,6 +39,7 @@ public class SignInTest {
 	public void I_should_be_able_to_see_the_pages_I_added_into_my_account() throws Throwable {
 		WebElement user_row = driver.findElement(By.id("user_row"));
 		assertEquals("dummy", user_row.getText());
+		driver.quit();
 	}
 
 }

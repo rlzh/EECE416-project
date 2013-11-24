@@ -5,6 +5,5 @@ Feature: Organizing Articles
 
     Scenario: Liking Engadget article
         Given I added Engadget into my account
-        And I liked the Engadget article
         When I click the Heart icon
         Then Engadget should be liked and shows up in my Liked page
