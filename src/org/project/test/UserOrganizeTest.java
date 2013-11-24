@@ -110,33 +110,33 @@ public class UserOrganizeTest extends BaseTest{
 		// add a new article
 		String id = addPage(url, title, summary);
 		
-		try {
-			Actions builder = new Actions(driver);
-			WebElement article = driver.findElement( By.xpath( "//a[@title='" + title +"']" ) );
-			builder.moveToElement(article).perform();
-			
-			driver.findElement( By.linkText( "move" ) ).click();
 
-			WebElement folder = driver.findElements( By.className( "moveTo" ) ).get(0);
-			String folderName = folder.getText();
-			System.out.println(folderName);
-			
-			folder.click();
-			
+		Actions builder = new Actions(driver);
+		WebElement article = driver.findElement( By.xpath( "//a[@title='" + title +"']" ) );
+		builder.moveToElement(article).perform();
+		
+		driver.findElement( By.linkText( "move" ) ).click();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
+		WebElement folder = driver.findElements( By.className( "moveTo" ) ).get(0);
+		String folderName = folder.getText();
+		//System.out.println(folderName);
+		
+		folder.click();
+
 		
 		driver.findElement( By.id( "folder_toggle" ) ).click();
-		driver.findElement( By.xpath( "//a[@href='http://www.instapaper.com/u/folder/2193586/folder-1']" ) ).click();
-		//System.out.println(destFolder.getText());
+		driver.findElement( By.linkText( folderName ) ).click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		driver.findElement( By.linkText( folderName ) ).click();
+
+		assertNotNull( driver.findElement( By.linkText( title ) ) );
 		
-		//assertNotNull( driver.findElement( By.xpath( "//a[@title='" + title +"']" ) ) );
-		
-		//super.removePage(id, title);
-		//Thread.sleep(10000);
+		super.removePage(id, title);
 	}
 	
 	
