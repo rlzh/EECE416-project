@@ -8,7 +8,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @Cucumber.Options(
 		format = {"pretty", "html:target/cucumber"},
-		features = "src/org/project/cucumber"
+		features = "features"
 		)
 public class CukesRunner {
 
