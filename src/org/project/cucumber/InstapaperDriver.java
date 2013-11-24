@@ -19,6 +19,10 @@ public class InstapaperDriver extends FirefoxDriver {
 		else get(url);
 	}
 	
+	public String getUrl() {
+		return this.url;
+	}
+	
 	public void logIn() {
 		get(url);
 		WebElement signIn = findElement(By.linkText("Sign In"));

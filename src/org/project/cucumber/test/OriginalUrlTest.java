@@ -34,7 +34,7 @@ public class OriginalUrlTest {
 	@Then("^I should be at Engadget's original website with url http://www.engadget.com$")
 	public void I_should_be_at_Engadget_s_original_website_with_url_http_www_engadget_com() throws Throwable {
 	   assertEquals(driver.getCurrentUrl(), url);
-	   driver.logIn();
+	   driver.get(driver.getUrl());
 	   driver.removePage(id, title);
 	   driver.quit();
 	}
