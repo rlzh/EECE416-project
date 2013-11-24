@@ -42,10 +42,6 @@ public class BaseTest {
 		PageLayout();
 	}
 	
-	public void createAccount(String username, String password) {
-		
-	}
-	
 	private void PageLayout() {
 		// check for site header
 		assertNotNull( driver.findElement( By.id( "header" ) ) );
