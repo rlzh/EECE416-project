@@ -23,7 +23,7 @@ public class BaseTest {
 	
 	@After
 	public void closeFirefox() {
-		driver.close();
+		driver.quit();
 	}
 	
 	public void logIn() {
@@ -35,8 +35,8 @@ public class BaseTest {
 		WebElement newPassword = driver.findElement(By.id("password"));
 		newPassword.sendKeys(password);
 
-		WebElement register = driver.findElement(By.id("log_in"));
-		register.click();
+		WebElement signInBtn = driver.findElement(By.id("log_in"));
+		signInBtn.click();
 		
 		// check page layout
 		PageLayout();
