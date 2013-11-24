@@ -2,7 +2,9 @@ package com.project.selenium;
 
 import org.junit.After;
 import org.junit.Before;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BaseTest {
@@ -23,8 +25,17 @@ public class BaseTest {
 		driver.close();
 	}
 	
-	public void logIn(String username, String password) {
-		
+	public void logIn() {
+		WebElement signIn = driver.findElement(By.linkText("Sign In"));
+		signIn.click();
+
+		WebElement newUsername = driver.findElement(By.id("username"));
+		newUsername.sendKeys(username);
+		WebElement newPassword = driver.findElement(By.id("password"));
+		newPassword.sendKeys(password);
+
+		WebElement register = driver.findElement(By.id("log_in"));
+		register.click();
 	}
 	
 	public void createAccount(String username, String password) {
