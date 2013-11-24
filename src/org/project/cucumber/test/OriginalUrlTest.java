@@ -14,43 +14,25 @@ import cucumber.api.java.en.When;
 public class OriginalUrlTest {
 	
 	private InstapaperDriver driver = new InstapaperDriver(true);
+	private static String url = "http://www.engadget.com/";
+	private static String title = "Engadget";
+	private static String summary = "Engadget website";
 	
 	@Given("^I am reading Engadget on my account$")
 	public void I_am_reading_Engadget_on_my_account() throws Throwable {
-		String url = "http://www.engadget.com/";
-		String title = "Engadget";
-		String summary = "Engadget website";
 		
-		try {
-			WebElement action = driver.findElement(By.xpath("//a[@title='Actions']"));
-			action.click();
-			
-			WebElement add = driver.findElement(By.linkText("Add Article"));
-			add.click();
-			
-			WebElement pageTitle = driver.findElement(By.className("page_title"));
-			assertEquals(pageTitle.getText(), "Add Article");
-			
-			driver.findElement(By.id("bookmarkurl")).sendKeys(url);
-			driver.findElement(By.id("bookmarktitle")).sendKeys(title);
-			driver.findElement(By.id("bookmarkselection")).sendKeys(summary);
-			
-			driver.findElement(By.id("submit")).submit();
-		} catch(Exception e) {
-			
-		}
+		driver.addPage(url, title, summary);
+		driver.findElement( By.xpath("//a[@title='" + title + "']") ).click();
 	}
 
 	@When("^I click on the Globe icon$")
 	public void I_click_on_the_Globe_icon() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+		driver.findElement( By.xpath( "//a[@title='View Original']" ) ).click();
 	}
 
 	@Then("^I should be at Engadget's original website with url http://www.engadget.com$")
 	public void I_should_be_at_Engadget_s_original_website_with_url_http_www_engadget_com() throws Throwable {
-	    // Express the Regexp above with the code you wish you had
-	    throw new PendingException();
+	   assertEquals(driver.getCurrentUrl(), url);
 	}
 
 }
