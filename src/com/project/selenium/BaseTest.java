@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 
 public class BaseTest {
 	
@@ -108,5 +109,17 @@ public class BaseTest {
 		
 		driver.findElement(By.xpath("//a[@href='" + "/delete/"+id + "']")).click();
 		driver.switchTo().alert().accept();
+	}
+	
+	/**
+	 * Helper function to remove page
+	 * @param id
+	 * @param title
+	 */
+	protected void removePage(String id, String title) {
+		Actions builder = new Actions(driver); 
+		WebElement added = driver.findElement(By.xpath("//a[@title='"+ title + "']"));
+		builder.moveToElement(added).perform();
+		removePage(id);
 	}
 }
