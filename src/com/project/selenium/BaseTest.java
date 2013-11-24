@@ -99,4 +99,14 @@ public class BaseTest {
 		
 		return split[split.length-1];
 	}
+	
+	/**
+	 * Helper function to remove page
+	 * @param id
+	 */
+	protected void removePage(String id) {
+		
+		driver.findElement(By.xpath("//a[@href='" + "/delete/"+id + "']")).click();
+		driver.switchTo().alert().accept();
+	}
 }

@@ -49,9 +49,7 @@ public class UserOrganizeTest extends BaseTest{
 		String id = split[split.length-1];
 		builder.moveToElement(added).perform();
 		
-		driver.findElement(By.xpath("//a[@href='" + "/delete/"+id + "']")).click();
-		
-		driver.switchTo().alert().accept();
+		removePage(id);
 		
 	}
 	

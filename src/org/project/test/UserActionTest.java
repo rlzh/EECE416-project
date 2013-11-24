@@ -50,19 +50,11 @@ public class UserActionTest extends BaseTest {
 			
 			driver.findElement(By.id("liked_nav")).click();
 			
-			WebElement liked = driver.findElement(By.xpath("//a[@title='"+ title + "']"));
-			builder.moveToElement(liked).perform();
-			driver.findElement(By.xpath("//a[@href='" + "/delete/"+id + "']")).click();
-			
-			driver.switchTo().alert().accept();
+			removePage(id);
 			
 		} catch (Exception e) {
 			fail();
 		}
-		
-		
-		
-		
 		
 	}
 	
@@ -79,15 +71,6 @@ public class UserActionTest extends BaseTest {
 	 */
 	@Test
 	public void SharePageTest() {
-		
-	}
-
-	
-	/**
-	 * Helper function to remove page
-	 * @param id
-	 */
-	private void removePage(String id) {
 		
 	}
 }
