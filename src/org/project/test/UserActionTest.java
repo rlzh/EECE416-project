@@ -143,6 +143,10 @@ public class UserActionTest extends BaseTest {
 			assertEquals(newUrl, resultUrl);
 			assertEquals(newTitle, resultTitle);
 			assertEquals(newSummary, resultSummary);
+			
+			driver.findElement(By.id("unread_nav")).click();
+			
+			removePage(id, newTitle);
 
 		} catch (Exception e) {
 			e.printStackTrace();
