@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 
 public class InstapaperDriver extends FirefoxDriver {
 
@@ -14,11 +15,12 @@ public class InstapaperDriver extends FirefoxDriver {
 	
 	public InstapaperDriver(boolean loggedIn) {
 		super();
-		get(url);
 		if (loggedIn) logIn();
+		else get(url);
 	}
 	
-	private void logIn() {
+	public void logIn() {
+		get(url);
 		WebElement signIn = findElement(By.linkText("Sign In"));
 		signIn.click();
 
@@ -58,5 +60,27 @@ public class InstapaperDriver extends FirefoxDriver {
 		return split[split.length-1];
 	}
 	
+	
+	/**
+	 * Helper function to remove page
+	 * @param id
+	 */
+	private void removePage(String id) {
+		
+		findElement(By.xpath("//a[@href='" + "/delete/"+id + "']")).click();
+		switchTo().alert().accept();
+	}
+	
+	/**
+	 * Helper function to remove page
+	 * @param id
+	 * @param title
+	 */
+	public void removePage(String id, String title) {
+		Actions builder = new Actions(this); 
+		WebElement added = findElement(By.xpath("//a[@title='"+ title + "']"));
+		builder.moveToElement(added).perform();
+		removePage(id);
+	}
 
 }

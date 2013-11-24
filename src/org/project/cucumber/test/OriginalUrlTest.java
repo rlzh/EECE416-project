@@ -17,11 +17,12 @@ public class OriginalUrlTest {
 	private static String url = "http://www.engadget.com/";
 	private static String title = "Engadget";
 	private static String summary = "Engadget website";
+	private static String id;
 	
 	@Given("^I am reading Engadget on my account$")
 	public void I_am_reading_Engadget_on_my_account() throws Throwable {
 		
-		driver.addPage(url, title, summary);
+		id = driver.addPage(url, title, summary);
 		driver.findElement( By.xpath("//a[@title='" + title + "']") ).click();
 	}
 
@@ -33,6 +34,9 @@ public class OriginalUrlTest {
 	@Then("^I should be at Engadget's original website with url http://www.engadget.com$")
 	public void I_should_be_at_Engadget_s_original_website_with_url_http_www_engadget_com() throws Throwable {
 	   assertEquals(driver.getCurrentUrl(), url);
+	   driver.logIn();
+	   driver.removePage(id, title);
+	   driver.quit();
 	}
 
 }
