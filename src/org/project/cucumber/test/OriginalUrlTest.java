@@ -1,6 +1,6 @@
 package org.project.cucumber.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -21,13 +21,14 @@ public class OriginalUrlTest {
 	
 	@Given("^I am reading Engadget on my account$")
 	public void I_am_reading_Engadget_on_my_account() throws Throwable {
-		
 		id = driver.addPage(url, title, summary);
+		assertNotNull( driver.findElement( By.xpath("//a[@title='" + title + "']") ) );
 		driver.findElement( By.xpath("//a[@title='" + title + "']") ).click();
 	}
 
 	@When("^I click on the Globe icon$")
 	public void I_click_on_the_Globe_icon() throws Throwable {
+		assertNotNull( driver.findElement( By.xpath( "//a[@title='View Original']" ) ) );
 		driver.findElement( By.xpath( "//a[@title='View Original']" ) ).click();
 	}
 
