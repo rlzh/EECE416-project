@@ -1,8 +1,9 @@
 package org.project.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -20,6 +21,9 @@ public class UserOrganizeTest extends BaseTest{
 		UnreadNavBtn.click();
 	}
 	
+	/**
+	 * Test adding a new article
+	 */
 	@Test
 	public void addNewArticleTest() {
 		
@@ -27,29 +31,67 @@ public class UserOrganizeTest extends BaseTest{
 		String title = "Engadget";
 		String summary = "Engadget website";
 		
-		WebElement action = driver.findElement(By.xpath("//a[@title='Actions']"));
-		action.click();
+		try {
+			
+			WebElement action = driver.findElement(By.xpath("//a[@title='Actions']"));
+			action.click();
+			
+			WebElement add = driver.findElement(By.linkText("Add Article"));
+			add.click();
+			
+			WebElement pageTitle = driver.findElement(By.className("page_title"));
+			assertEquals(pageTitle.getText(), "Add Article");
+			
+			driver.findElement(By.id("bookmarkurl")).sendKeys(url);
+			driver.findElement(By.id("bookmarktitle")).sendKeys(title);
+			driver.findElement(By.id("bookmarkselection")).sendKeys(summary);
+			
+			driver.findElement(By.id("submit")).submit();
+			
+			Actions builder = new Actions(driver); 
+			WebElement added = driver.findElement(By.xpath("//a[@title='"+ title + "']"));
+			String link = added.getAttribute("href");
+			String[] split = link.split("/");
+			String id = split[split.length-1];
+			builder.moveToElement(added).perform();
+			
+			removePage(id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
 		
-		WebElement add = driver.findElement(By.linkText("Add Article"));
-		add.click();
 		
-		WebElement pageTitle = driver.findElement(By.className("page_title"));
-		assertEquals(pageTitle.getText(), "Add Article");
 		
-		driver.findElement(By.id("bookmarkurl")).sendKeys(url);
-		driver.findElement(By.id("bookmarktitle")).sendKeys(title);
-		driver.findElement(By.id("bookmarkselection")).sendKeys(summary);
+	}
+	
+	/**
+	 * Test deleting an article
+	 */
+	@Test
+	public void deleteArticleTest() {
 		
-		driver.findElement(By.id("submit")).submit();
+		String url = "http://www.engadget.com/";
+		String title = "Engadget";
+		String summary = "Engadget website";
 		
-		Actions builder = new Actions(driver); 
-		WebElement added = driver.findElement(By.xpath("//a[@title='"+ title + "']"));
-		String link = added.getAttribute("href");
-		String[] split = link.split("/");
-		String id = split[split.length-1];
-		builder.moveToElement(added).perform();
+		// add a new article
+		String id = addPage(url, title, summary);
 		
-		removePage(id);
+		try {
+			
+			Actions builder = new Actions(driver); 
+			WebElement added = driver.findElement(By.xpath("//a[@title='"+ title + "']"));
+			builder.moveToElement(added).perform();
+			
+			driver.findElement(By.xpath("//a[@href='" + "/delete/"+id + "']")).click();
+			driver.switchTo().alert().accept();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
 		
 	}
 	
