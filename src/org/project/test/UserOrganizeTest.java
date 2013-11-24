@@ -46,35 +46,36 @@ public class UserOrganizeTest extends BaseTest{
 		deleteFolder(folderId);
 	}
 	
-	/*@Test 
+	@Test 
 	public void deleteFolderTest() {
-		
 		String id = addFolder("Delete This Folder");
 		
 		WebElement editBtn = driver.findElement( By.linkText( "Edit" ) );
 		editBtn.click();
 		WebElement deleteBtn = driver.findElement( By.xpath( "//a[@href='/delete_folder?folder="+ id  +"']" ) );
 		deleteBtn.click();
-		
-	}*/
+	}
 	
 	
 	private String addFolder(String folderTitle) {
-		WebElement addFolderBtn = driver.findElement( By.id( "add_folder" ) );
-		String addFolderUrl = addFolderBtn.getAttribute("href");
+		WebElement viewFolderBtn = driver.findElement( By.id( "folder_toggle" ) );
 
+		viewFolderBtn.click();
+		
+		WebElement addFolderBtn = driver.findElement( By.linkText( "Add" ) );
+		
 		addFolderBtn.click();
 		
-		assertTrue( driver.getCurrentUrl().equals(addFolderUrl) );
 		WebElement inputBox = driver.findElement( By.id( "foldertitle" ) );
 		inputBox.sendKeys( folderTitle );
 		
 		WebElement createFolderBtn = driver.findElement( By.xpath("//input[@value='Create Folder']" ) );
 		createFolderBtn.click();
 		
+		// check that folder has been created
 		WebElement editFolderBtn = driver.findElement( By.xpath( "//a[@title='Edit Folder']" ) );
 		String folderId = editFolderBtn.getAttribute("href").substring(38);
-			
+		
 		return folderId;
 	}
 	
