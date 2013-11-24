@@ -1,8 +1,10 @@
 package org.project.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
+
+import java.util.List;
+
+import javax.swing.plaf.metal.MetalIconFactory.FolderIcon16;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -94,16 +96,59 @@ public class UserOrganizeTest extends BaseTest{
 		}
 		
 	}
+	/**
+	 *  move article to an existing folder
+	 * 
+	 */
+	@Test
+	public void moveArticleTest() {
+		
+		String url = "http://www.engadget.com/";
+		String title = "Engadget";
+		String summary = "Engadget website";
+		
+		// add a new article
+		String id = addPage(url, title, summary);
+		
+		try {
+			Actions builder = new Actions(driver);
+			WebElement article = driver.findElement( By.xpath( "//a[@title='" + title +"']" ) );
+			builder.moveToElement(article).perform();
+			
+			driver.findElement( By.linkText( "move" ) ).click();
+
+			WebElement folder = driver.findElements( By.className( "moveTo" ) ).get(0);
+			String folderName = folder.getText();
+			System.out.println(folderName);
+			
+			folder.click();
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail();
+		}
+		
+		driver.findElement( By.id( "folder_toggle" ) ).click();
+		driver.findElement( By.xpath( "//a[@href='http://www.instapaper.com/u/folder/2193586/folder-1']" ) ).click();
+		//System.out.println(destFolder.getText());
+		
+		//assertNotNull( driver.findElement( By.xpath( "//a[@title='" + title +"']" ) ) );
+		
+		//super.removePage(id, title);
+		//Thread.sleep(10000);
+	}
+	
+	
+	/**
+	 *  test adding a new folder
+	 * 
+	 */
 	
 	@Test
 	public void addNewFolderTest() {
-		WebElement viewFolderBtn = driver.findElement( By.id( "folder_toggle" ) );
-
-		viewFolderBtn.click();
-		
-		WebElement addFolderBtn = driver.findElement( By.linkText( "Add" ) );
-		
-		addFolderBtn.click();
+		driver.findElement( By.id( "folder_toggle" ) ).click();
+		driver.findElement( By.linkText( "Add" ) ).click();
 		
 		WebElement inputBox = driver.findElement( By.id( "foldertitle" ) );
 		String folderTitle = "New Folder!"; 
@@ -122,17 +167,30 @@ public class UserOrganizeTest extends BaseTest{
 		deleteFolder(folderId);
 	}
 	
+	/**
+	 *  test deleting a folder
+	 * 
+	 */
 	@Test 
 	public void deleteFolderTest() {
 		String id = addFolder("Delete This Folder");
-		
-		WebElement editBtn = driver.findElement( By.linkText( "Edit" ) );
-		editBtn.click();
-		WebElement deleteBtn = driver.findElement( By.xpath( "//a[@href='/delete_folder?folder="+ id  +"']" ) );
-		deleteBtn.click();
+		driver.findElement( By.linkText( "Edit" ) ).click();
+		driver.findElement( By.xpath( "//a[@href='/delete_folder?folder="+ id  +"']" ) ).click();
+		try {
+			driver.findElement( By.xpath( "//a[@href='/delete_folder?folder="+ id  +"']" ) );
+			fail();
+		} catch (Exception e) {
+			
+		}
 	}
 	
+	// HELPER FUNCTIONS
 	
+	/**
+	 * add folder helper function
+	 * @param folderTitle
+	 * @return returns id of added folder
+	 */
 	private String addFolder(String folderTitle) {
 		WebElement viewFolderBtn = driver.findElement( By.id( "folder_toggle" ) );
 
@@ -154,6 +212,11 @@ public class UserOrganizeTest extends BaseTest{
 		
 		return folderId;
 	}
+	
+	/**
+	 * delete folder helper function
+	 * @param id of folder to be deleted
+	 */
 	
 	private void deleteFolder(String id) {
 		WebElement editBtn = driver.findElement( By.linkText( "Edit" ) );

@@ -41,10 +41,10 @@ public class BaseTest {
 		signInBtn.click();
 		
 		// check page layout
-		PageLayout();
+		checkPageLayout();
 	}
 	
-	private void PageLayout() {
+	private void checkPageLayout() {
 		// check for site header
 		assertNotNull( driver.findElement( By.id( "header" ) ) );
 		// check for navigation side bar
