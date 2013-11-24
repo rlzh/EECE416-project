@@ -40,15 +40,27 @@ public class UserActionTest extends BaseTest {
 		
 		try {
 			
+			WebElement article = driver.findElement(By.xpath("//a[@title='"+ title + "']"));
+			
+			Actions builder = new Actions(driver); 
+			Actions hoverOverRegistrar = builder.moveToElement(article);
+			hoverOverRegistrar.perform();
+			
+			driver.findElement(By.xpath("//a[@href='" + "/star_toggle/"+id + "']")).click();
+			
+			driver.findElement(By.id("liked_nav")).click();
+			
+			WebElement liked = driver.findElement(By.xpath("//a[@title='"+ title + "']"));
+			builder.moveToElement(liked).perform();
+			driver.findElement(By.xpath("//a[@href='" + "/delete/"+id + "']")).click();
+			
+			driver.switchTo().alert().accept();
+			
 		} catch (Exception e) {
 			fail();
 		}
 		
-		WebElement article = driver.findElement(By.xpath("//a[@title='"+ title + "']"));
 		
-		Actions builder = new Actions(driver); 
-		Actions hoverOverRegistrar = builder.moveToElement(article);
-		hoverOverRegistrar.perform();
 		
 		
 		
@@ -69,40 +81,13 @@ public class UserActionTest extends BaseTest {
 	public void SharePageTest() {
 		
 	}
-	
-	/**
-	 * Helper function to add new page into the account
-	 * @param url
-	 * @return the id of the article added
-	 */
-	private String addPage(String url, String title, String summary) {
-		WebElement action = driver.findElement(By.xpath("//a[@title='Actions']"));
-		action.click();
-		
-		WebElement add = driver.findElement(By.linkText("Add Article"));
-		add.click();
-		
-		WebElement pageTitle = driver.findElement(By.className("page_title"));
-		assertEquals(pageTitle.getText(), "Add Article");
-		
-		driver.findElement(By.id("bookmarkurl")).sendKeys(url);
-		driver.findElement(By.id("bookmarktitle")).sendKeys(title);
-		driver.findElement(By.id("bookmarkselection")).sendKeys(summary);
-		
-		driver.findElement(By.id("submit")).submit();
-		
-		WebElement article = driver.findElement(By.xpath("//a[@title='"+ title + "']"));
-		String link = article.getAttribute("href");
-		String[] split = link.split("/");
-		
-		return split[split.length-1];
-	}
+
 	
 	/**
 	 * Helper function to remove page
-	 * @param url
+	 * @param id
 	 */
-	private void removePage(String url) {
+	private void removePage(String id) {
 		
 	}
 }

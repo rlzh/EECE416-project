@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.project.selenium.BaseTest;
 
@@ -17,6 +18,41 @@ public class UserOrganizeTest extends BaseTest{
 		logIn();
 		WebElement UnreadNavBtn = driver.findElement( By.id( "unread_nav" ) );
 		UnreadNavBtn.click();
+	}
+	
+	@Test
+	public void addNewArticleTest() {
+		
+		String url = "http://www.engadget.com/";
+		String title = "Engadget";
+		String summary = "Engadget website";
+		
+		WebElement action = driver.findElement(By.xpath("//a[@title='Actions']"));
+		action.click();
+		
+		WebElement add = driver.findElement(By.linkText("Add Article"));
+		add.click();
+		
+		WebElement pageTitle = driver.findElement(By.className("page_title"));
+		assertEquals(pageTitle.getText(), "Add Article");
+		
+		driver.findElement(By.id("bookmarkurl")).sendKeys(url);
+		driver.findElement(By.id("bookmarktitle")).sendKeys(title);
+		driver.findElement(By.id("bookmarkselection")).sendKeys(summary);
+		
+		driver.findElement(By.id("submit")).submit();
+		
+		Actions builder = new Actions(driver); 
+		WebElement added = driver.findElement(By.xpath("//a[@title='"+ title + "']"));
+		String link = added.getAttribute("href");
+		String[] split = link.split("/");
+		String id = split[split.length-1];
+		builder.moveToElement(added).perform();
+		
+		driver.findElement(By.xpath("//a[@href='" + "/delete/"+id + "']")).click();
+		
+		driver.switchTo().alert().accept();
+		
 	}
 	
 	@Test

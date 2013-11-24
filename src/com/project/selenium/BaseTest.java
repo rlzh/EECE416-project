@@ -3,6 +3,7 @@ package com.project.selenium;
 import org.junit.After;
 import org.junit.Before;
 import static org.junit.Assert.*;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -69,5 +70,33 @@ public class BaseTest {
 		assertNotNull( driver.findElement( By.className( "page_header" ) ) );
 		// check for main content 
 		assertNotNull( driver.findElement( By.id( "main_column" ) ) );
+	}
+	
+	/**
+	 * Helper function to add new page into the account
+	 * @param url
+	 * @return the id of the article added
+	 */
+	protected String addPage(String url, String title, String summary) {
+		WebElement action = driver.findElement(By.xpath("//a[@title='Actions']"));
+		action.click();
+		
+		WebElement add = driver.findElement(By.linkText("Add Article"));
+		add.click();
+		
+		WebElement pageTitle = driver.findElement(By.className("page_title"));
+		assertEquals(pageTitle.getText(), "Add Article");
+		
+		driver.findElement(By.id("bookmarkurl")).sendKeys(url);
+		driver.findElement(By.id("bookmarktitle")).sendKeys(title);
+		driver.findElement(By.id("bookmarkselection")).sendKeys(summary);
+		
+		driver.findElement(By.id("submit")).submit();
+		
+		WebElement article = driver.findElement(By.xpath("//a[@title='"+ title + "']"));
+		String link = article.getAttribute("href");
+		String[] split = link.split("/");
+		
+		return split[split.length-1];
 	}
 }
