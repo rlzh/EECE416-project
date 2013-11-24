@@ -136,9 +136,9 @@ public class UserActionTest extends BaseTest {
 			
 			driver.findElement(By.xpath("//a[@href='" + "/edit/"+id + "']")).click();
 			
-			String resultUrl = driver.findElement(By.id("bookmarkurl")).getText();
-			String resultTitle = driver.findElement(By.id("bookmarktitle")).getText();
-			String resultSummary = driver.findElement(By.id("bookmarkselection")).getText();
+			String resultUrl = driver.findElement(By.id("bookmarkurl")).getAttribute("value");
+			String resultTitle = driver.findElement(By.id("bookmarktitle")).getAttribute("value");
+			String resultSummary = driver.findElement(By.id("bookmarkselection")).getAttribute("value");
 			
 			assertEquals(newUrl, resultUrl);
 			assertEquals(newTitle, resultTitle);
