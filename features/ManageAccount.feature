@@ -7,7 +7,7 @@ Scenario: Register for newDummy account
 	Given I click Create Account
 	And I entered my email newDummy@gmail.com as username
 	And I entered 123456 as my password
-	When I click Create Account
+	When I click Create Account again
 	Then I should be logged in as newDummy
 
 Scenario: Logging into dummy account
