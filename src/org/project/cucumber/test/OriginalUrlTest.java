@@ -1,12 +1,11 @@
 package org.project.cucumber.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.project.cucumber.InstapaperDriver;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
