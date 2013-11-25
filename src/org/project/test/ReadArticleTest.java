@@ -13,14 +13,14 @@ import com.project.selenium.BaseTest;
 public class ReadArticleTest extends BaseTest {
 
 	@Before
-	public void SetUp() {
+	public void setUp() {
 		super.logIn();
 		WebElement UnreadNavBtn = driver.findElement( By.id( "unread_nav" ) );
 		UnreadNavBtn.click();
 	}
 	
 	@Test
-	public void SimpleReadTest() {
+	public void simpleReadTest() {
 		try {
 			WebElement articleLink = driver.findElements( By.className( "title_row" ) )
 											.get(0)
@@ -44,7 +44,7 @@ public class ReadArticleTest extends BaseTest {
 	 * 
 	 */
 	@Test
-	public void EditFontTest() {
+	public void editFontTest() {
 		goToFirstArticle();
 		try {
 			driver.findElement( By.className( "fontOptions" ) ).click();
@@ -71,7 +71,7 @@ public class ReadArticleTest extends BaseTest {
 	 * 
 	 */
 	@Test
-	public void FontSizeTest() {
+	public void fontSizeTest() {
 		goToFirstArticle();
 		try {
 			driver.findElement( By.className( "fontOptions" ) ).click();
@@ -121,7 +121,7 @@ public class ReadArticleTest extends BaseTest {
 	 * 
 	 */
 	@Test
-	public void MarginSizeTest() {
+	public void marginSizeTest() {
 		goToFirstArticle();
 		try {
 			driver.findElement( By.className( "fontOptions" ) ).click();
@@ -154,7 +154,7 @@ public class ReadArticleTest extends BaseTest {
 	 *  test background colors
 	 */
 	@Test
-	public void BackGroundColorTest() {
+	public void backGroundColorTest() {
 		goToFirstArticle();
 		try {
 			driver.findElement( By.className( "fontOptions" ) ).click();
@@ -177,7 +177,7 @@ public class ReadArticleTest extends BaseTest {
 	 *  test going back to original article site
 	 */
 	@Test
-	public void GoToOriginalTest() {
+	public void goToOriginalTest() {
 		goToFirstArticle();
 		try {
 			WebElement originalLink = driver.findElement( By.xpath( "//a[@title='View Original']" ) );
