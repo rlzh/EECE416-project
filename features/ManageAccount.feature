@@ -1,6 +1,6 @@
 Feature: ManageAccount
-    In order to manage things easier
-    As a user who uses Instapaper
+    In order to use my Instapaper account
+    As a user who reads articles
     I want to manage my account
 
 Scenario: Register for newDummy account
