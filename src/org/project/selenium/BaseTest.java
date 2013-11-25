@@ -2,6 +2,7 @@ package org.project.selenium;
 
 import org.junit.After;
 import org.junit.Before;
+
 import static org.junit.Assert.*;
 
 import org.openqa.selenium.By;
@@ -122,4 +123,42 @@ public class BaseTest {
 		builder.moveToElement(added).perform();
 		removePage(id);
 	}
+	
+	
+	/**
+	 * add folder helper function
+	 * @param folderTitle
+	 * @return returns id of added folder
+	 */
+	protected String addFolder(String folderTitle) {
+		driver.findElement( By.id( "folder_toggle" ) ).click();
+		
+		driver.findElement( By.linkText( "Add" ) ).click();
+		
+		WebElement inputBox = driver.findElement( By.id( "foldertitle" ) );
+		inputBox.sendKeys( folderTitle );
+		
+		WebElement createFolderBtn = driver.findElement( By.xpath("//input[@value='Create Folder']" ) );
+		createFolderBtn.click();
+		
+		// check that folder has been created
+		WebElement editFolderBtn = driver.findElement( By.xpath( "//a[@title='Edit Folder']" ) );
+		String folderId = editFolderBtn.getAttribute("href").substring(38);
+		
+		return folderId;
+	}
+	
+	/**
+	 * delete folder helper function
+	 * @param id of folder to be deleted
+	 */
+	
+	protected void deleteFolder(String id) {
+		WebElement editBtn = driver.findElement( By.linkText( "Edit" ) );
+		editBtn.click();
+		WebElement deleteBtn = driver.findElement( By.xpath( "//a[@href='/delete_folder?folder="+ id +"']" ) );
+		deleteBtn.click();
+	}
+
+
 }
