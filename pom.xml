@@ -38,6 +38,11 @@
 			<groupId>com.opera</groupId>
 			<artifactId>operadriver</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.github.tntim96</groupId>
+			<artifactId>JSCover</artifactId>
+			<version>1.0.6</version>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
