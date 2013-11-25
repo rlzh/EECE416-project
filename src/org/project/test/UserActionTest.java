@@ -7,8 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
-import com.project.selenium.BaseTest;
+import org.project.selenium.BaseTest;
 
 public class UserActionTest extends BaseTest {
 
@@ -93,7 +92,7 @@ public class UserActionTest extends BaseTest {
 	 * Edit information associated to the page
 	 */
 	@Test
-	public void editPageTest() {
+	public void editArticleTest() {
 
 		String url = "http://www.engadget.com/";
 		String title = "Engadget";

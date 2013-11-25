@@ -1,11 +1,11 @@
 package org.project.test;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import com.project.selenium.BaseTest;
+import org.project.selenium.BaseTest;
 
 public class AccountTest extends BaseTest {
 

@@ -8,8 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import com.project.selenium.BaseTest;
+import org.project.selenium.BaseTest;
 
 public class ReadArticleTest extends BaseTest {
 
@@ -33,7 +32,7 @@ public class ReadArticleTest extends BaseTest {
 			
 			assertTrue( driver.getCurrentUrl().equals( articleUrl ) );
 	
-			CheckPageLayout();
+			checkPageLayout();
 		} catch (Exception e) {
 			// TODO: handle exception
 			fail();
@@ -204,7 +203,7 @@ public class ReadArticleTest extends BaseTest {
 	}
 	
 	// helper function to verify GUI presence
-	private void CheckPageLayout() {
+	private void checkPageLayout() {
 		assertNotNull( driver.findElement( By.id("titlebar") ) );
 		assertNotNull( driver.findElement( By.id("story") ) );
 		assertNotNull( driver.findElement( By.id("footer") ) );
