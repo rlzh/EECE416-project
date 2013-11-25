@@ -184,10 +184,7 @@ public class UserActionTest extends BaseTest {
 			driver.findElement( By.xpath( "//a[@title='Actions']" ) ).click();
 			driver.findElement( By.id( "archive_all" ) ).click();
 			driver.switchTo().alert().accept();
-			
-			driver.switchTo().activeElement();
-			driver.switchTo().defaultContent();
-			
+					
 			driver.findElement( By.id( "archive_nav" ) ).click();
 			
 			assertNotNull( driver.findElement( By.linkText( title ) ) );
