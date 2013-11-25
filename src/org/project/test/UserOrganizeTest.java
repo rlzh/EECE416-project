@@ -232,7 +232,7 @@ public class UserOrganizeTest extends BaseTest{
 			
 			driver.findElement( By.xpath( "//a[@title='Actions']" ) ).click();
 			driver.findElement( By.id( "delete_all" ) ).click();
-			
+			driver.switchTo().alert().accept();
 			assertNull( driver.findElement( By.className( "article_item" ) ) );
 			fail();
 		} catch (Exception e) {
