@@ -86,5 +86,19 @@ public class InstapaperDriver extends FirefoxDriver {
 		builder.moveToElement(added).perform();
 		removePage(id);
 	}
+	
+	/**
+	 * Helper function to delete account
+	 */
+	public void deleteAccount() {
+		WebElement user_row = findElement(By.id("user_row"));
+		user_row.click();
+
+		WebElement deleteAccount = findElement(By.linkText("Delete Account"));
+		deleteAccount.click();
+
+		WebElement deleter = findElement(By.className("deleter"));
+		deleter.click();
+	}
 
 }
