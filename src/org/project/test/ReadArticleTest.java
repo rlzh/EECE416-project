@@ -1,7 +1,8 @@
 package org.project.test;
 
-import static org.junit.Assert.*;
-import net.sourceforge.htmlunit.corejs.javascript.ast.TryStatement;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +15,7 @@ public class ReadArticleTest extends BaseTest {
 
 	@Before
 	public void setUp() {
+		super.setUp();
 		super.logIn();
 		WebElement UnreadNavBtn = driver.findElement( By.id( "unread_nav" ) );
 		UnreadNavBtn.click();
