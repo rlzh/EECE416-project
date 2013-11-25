@@ -174,6 +174,33 @@ public class UserOrganizeTest extends BaseTest{
 		}
 	}
 	
+	/**
+	 *  test renaming a folder
+	 * 
+	 */
+	@Test 
+	public void renameFolderTest() {
+		String id = addFolder( "Rename This Folder" );
+		
+		try {
+			String newFolderTitle = "New Folder Name";
+			driver.findElement( By.linkText( "Edit" ) ).click();
+			driver.findElement( By.xpath( "//a[@href='/edit_folder/"+ id  +"']" ) ).click();
+			WebElement input = driver.findElement( By.id( "foldertitle" ) );
+			input.clear();
+			input.sendKeys( newFolderTitle );
+			driver.findElement( By.xpath( "//input[@type='submit']" ) ).click();
+			
+			assertNotNull( driver.findElement( By.linkText( newFolderTitle ) ) );
+			
+			deleteFolder(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+			fail();
+		}
+
+	}
+	
 	// HELPER FUNCTIONS
 	
 	/**
@@ -182,13 +209,9 @@ public class UserOrganizeTest extends BaseTest{
 	 * @return returns id of added folder
 	 */
 	private String addFolder(String folderTitle) {
-		WebElement viewFolderBtn = driver.findElement( By.id( "folder_toggle" ) );
-
-		viewFolderBtn.click();
+		driver.findElement( By.id( "folder_toggle" ) ).click();
 		
-		WebElement addFolderBtn = driver.findElement( By.linkText( "Add" ) );
-		
-		addFolderBtn.click();
+		driver.findElement( By.linkText( "Add" ) ).click();
 		
 		WebElement inputBox = driver.findElement( By.id( "foldertitle" ) );
 		inputBox.sendKeys( folderTitle );
