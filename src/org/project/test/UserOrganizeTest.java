@@ -144,8 +144,7 @@ public class UserOrganizeTest extends BaseTest{
 		String folderTitle = "New Folder!"; 
 		inputBox.sendKeys( folderTitle );
 		
-		WebElement createFolderBtn = driver.findElement( By.xpath("//input[@value='Create Folder']" ) );
-		createFolderBtn.click();
+		driver.findElement( By.xpath("//input[@value='Create Folder']" ) ).click();
 		
 		// check that folder has been created
 		assertNotNull( driver.findElement( By.className( "folder_mode" ) ) );
@@ -199,43 +198,6 @@ public class UserOrganizeTest extends BaseTest{
 			fail();
 		}
 
-	}
-	
-	// HELPER FUNCTIONS
-	
-	/**
-	 * add folder helper function
-	 * @param folderTitle
-	 * @return returns id of added folder
-	 */
-	private String addFolder(String folderTitle) {
-		driver.findElement( By.id( "folder_toggle" ) ).click();
-		
-		driver.findElement( By.linkText( "Add" ) ).click();
-		
-		WebElement inputBox = driver.findElement( By.id( "foldertitle" ) );
-		inputBox.sendKeys( folderTitle );
-		
-		WebElement createFolderBtn = driver.findElement( By.xpath("//input[@value='Create Folder']" ) );
-		createFolderBtn.click();
-		
-		// check that folder has been created
-		WebElement editFolderBtn = driver.findElement( By.xpath( "//a[@title='Edit Folder']" ) );
-		String folderId = editFolderBtn.getAttribute("href").substring(38);
-		
-		return folderId;
-	}
-	
-	/**
-	 * delete folder helper function
-	 * @param id of folder to be deleted
-	 */
-	
-	private void deleteFolder(String id) {
-		WebElement editBtn = driver.findElement( By.linkText( "Edit" ) );
-		editBtn.click();
-		WebElement deleteBtn = driver.findElement( By.xpath( "//a[@href='/delete_folder?folder="+ id +"']" ) );
-		deleteBtn.click();
 	}
 	
 }

@@ -153,4 +153,51 @@ public class UserActionTest extends BaseTest {
 		}
 
 	}
+	
+	/**
+	 *  test archive all function
+	 * 
+	 */
+	@Test 
+	public void archiveAllTest() {
+		String url = "http://www.engadget.com/";
+		String title = "Engadget";
+		String summary = "Engadget website";
+		
+		String articleId = addPage(url, title, summary);
+		try {
+			Actions builder = new Actions(driver);
+			WebElement article = driver.findElement( By.xpath( "//a[@title='" + title +"']" ) );
+			builder.moveToElement(article).perform();
+			
+			driver.findElement( By.linkText( "move" ) ).click();
+
+			WebElement folder = driver.findElements( By.className( "moveTo" ) ).get(0);
+			String folderName = folder.getText();
+			
+			folder.click();
+
+			driver.findElement( By.id( "folder_toggle" ) ).click();
+			driver.findElement( By.linkText( folderName ) ).click();
+			driver.findElement( By.linkText( folderName ) ).click(); // <----- BUG: NEED 2 CLICKS FOR LINK TO WORK
+
+			driver.findElement( By.xpath( "//a[@title='Actions']" ) ).click();
+			driver.findElement( By.id( "archive_all" ) ).click();
+			driver.switchTo().alert().accept();
+			
+			driver.switchTo().activeElement();
+			driver.switchTo().defaultContent();
+			
+			driver.findElement( By.id( "archive_nav" ) ).click();
+			
+			assertNotNull( driver.findElement( By.linkText( title ) ) );
+			
+			removePage(articleId, title);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			fail();
+		}
+
+	}
 }
