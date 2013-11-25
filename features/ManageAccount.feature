@@ -16,8 +16,15 @@ Scenario: Logging into dummy account
 	When I click Sign In
 	Then I should be able to see the pages I added into my account
 	
+Scenario: Sign out of dummy account
+	Given I am logged in as dummy
+	When I click on my profile setting
+	And I click on Sign Out icon
+	Then I should be signed out
+	
 Scenario: Delete newDummy account
-	Given I am logged in as newDUmmy
+	Given I created newDummy account
+	And I am logged in as newDUmmy
 	And I click my profile setting
 	When I click Delete My Account
 	And confirmed the deletion
