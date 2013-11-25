@@ -159,7 +159,7 @@ public class UserActionTest extends BaseTest {
 	 * 
 	 */
 	@Test 
-	public void archiveAllTest() {
+	public void archiveAllArticleTest() {
 		String url = "http://www.engadget.com/";
 		String title = "Engadget";
 		String summary = "Engadget website";

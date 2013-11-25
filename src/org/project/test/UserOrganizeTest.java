@@ -205,7 +205,7 @@ public class UserOrganizeTest extends BaseTest{
 	 * 
 	 */
 	@Test
-	public void deleteAllTest() {
+	public void deleteAllArticleTest() {
 		String url1 = "http://www.engadget.com/";
 		String title1 = "Engadget";
 		String summary1 = "Engadget website";
