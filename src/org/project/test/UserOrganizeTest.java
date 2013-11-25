@@ -200,4 +200,45 @@ public class UserOrganizeTest extends BaseTest{
 
 	}
 	
+	/**
+	 * test delete all 
+	 * 
+	 */
+	@Test
+	public void deleteAllTest() {
+		String url1 = "http://www.engadget.com/";
+		String title1 = "Engadget";
+		String summary1 = "Engadget website";
+		String id1 = addPage(url1, title1, summary1);
+		
+		String url2 = "http://www.bleacherreport.com/";
+		String title2 = "Bleacher Report";
+		String summary2 = "Sports news";
+		String id2 = addPage(url2, title2, summary2);
+		
+		Actions builder = new Actions(driver);
+		WebElement article1 = driver.findElement( By.xpath( "//a[@title='" + title1 +"']" ) );
+		builder.moveToElement(article1).perform();
+		
+		driver.findElement( By.id( "skip"+id1 ) ).click();
+		
+		WebElement article2 = driver.findElement( By.xpath( "//a[@title='" + title2 +"']" ) );
+		builder.moveToElement(article2).perform();
+		
+		driver.findElement(By.id( "skip"+id2 ) ).click();
+
+		try {
+			driver.findElement( By.id( "archive_nav" ) ).click();
+			
+			driver.findElement( By.xpath( "//a[@title='Actions']" ) ).click();
+			driver.findElement( By.id( "delete_all" ) ).click();
+			
+			assertNull( driver.findElement( By.className( "article_item" ) ) );
+			fail();
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+		}
+
+	}
 }

@@ -160,5 +160,22 @@ public class BaseTest {
 		deleteBtn.click();
 	}
 
+	/**
+	 *  takes page title and moves page to top folder in folder list
+	 * @param pageTitle
+	 * @return returns name of folder moved to
+	 */
+	protected String movePageToFolder(String pageTitle) {
+		Actions builder = new Actions(driver);
+		WebElement article = driver.findElement( By.xpath( "//a[@title='" + pageTitle +"']" ) );
+		builder.moveToElement(article).perform();
+		
+		driver.findElement( By.linkText( "move" ) ).click();
 
+		WebElement folder = driver.findElements( By.className( "moveTo" ) ).get(0);
+		String folderName = folder.getText();
+		folder.click();
+		
+		return folderName;
+	}
 }

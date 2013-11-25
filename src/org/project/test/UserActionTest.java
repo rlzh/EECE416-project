@@ -166,20 +166,11 @@ public class UserActionTest extends BaseTest {
 		
 		String articleId = addPage(url, title, summary);
 		try {
-			Actions builder = new Actions(driver);
-			WebElement article = driver.findElement( By.xpath( "//a[@title='" + title +"']" ) );
-			builder.moveToElement(article).perform();
-			
-			driver.findElement( By.linkText( "move" ) ).click();
-
-			WebElement folder = driver.findElements( By.className( "moveTo" ) ).get(0);
-			String folderName = folder.getText();
-			
-			folder.click();
+			String folderName = movePageToFolder(title);
 
 			driver.findElement( By.id( "folder_toggle" ) ).click();
 			driver.findElement( By.linkText( folderName ) ).click();
-			driver.findElement( By.linkText( folderName ) ).click(); // <----- BUG: NEED 2 CLICKS FOR LINK TO WORK
+			driver.findElement( By.linkText( folderName ) ).click(); // <----- NEED 2 CLICKS FOR LINK TO WORK
 
 			driver.findElement( By.xpath( "//a[@title='Actions']" ) ).click();
 			driver.findElement( By.id( "archive_all" ) ).click();
