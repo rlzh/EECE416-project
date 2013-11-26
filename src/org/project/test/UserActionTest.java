@@ -188,4 +188,84 @@ public class UserActionTest extends BaseTest {
 		}
 
 	}
+	
+	/**
+	 *  test unarchiving an article
+	 * 
+	 */
+	@Test
+	public void unarchiveArticleTest() {
+		String url = "http://www.engadget.com/";
+		String title = "Engadget";
+		String summary = "Engadget website";
+		
+		String articleId = addPage(url, title, summary);
+		try {
+			Actions builder = new Actions(driver);
+			WebElement article = driver.findElement( By.xpath( "//a[@title='" + title +"']" ) );
+			builder.moveToElement(article).perform();
+			
+			driver.findElement( By.id( "skip"+articleId ) ).click();
+			
+			driver.findElement( By.id( "archive_nav" ) ).click();
+			
+			builder = new Actions(driver);
+			article = driver.findElement( By.xpath( "//a[@title='" + title +"']" ) );
+			builder.moveToElement(article).perform();
+			
+			driver.findElement( By.id( "unread"+articleId ) ).click();
+			
+			driver.findElement( By.id( "unread_nav" ) ).click();
+			
+			assertNotNull( driver.findElement( By.xpath( "//a[@title='" + title +"']" ) ) );
+			
+			removePage(articleId, title);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			fail();
+		}
+		
+	}
+	
+	/**
+	 *  test unliking an article
+	 * 
+	 */
+	@Test
+	public void unlikeArticleTest() {
+		String url = "http://www.engadget.com/";
+		String title = "Engadget";
+		String summary = "Engadget website";
+		
+		String id = addPage(url, title, summary);
+		try {
+			WebElement article = driver.findElement(By.xpath("//a[@title='"+ title + "']"));
+
+			Actions builder = new Actions(driver); 
+			Actions hoverOverRegistrar = builder.moveToElement(article);
+			hoverOverRegistrar.perform();
+
+			driver.findElement(By.xpath("//a[@href='" + "/star_toggle/"+id + "']")).click();
+			
+			driver.findElement(By.id("liked_nav")).click();
+			
+			article = driver.findElement(By.xpath("//a[@title='"+ title + "']"));
+			builder = new Actions(driver); 
+			hoverOverRegistrar = builder.moveToElement(article);
+			hoverOverRegistrar.perform();
+			
+			driver.findElement(By.xpath("//a[@href='" + "/star_toggle/"+id + "']")).click();
+
+			article = driver.findElement(By.xpath("//a[@title='"+ title + "']"));
+
+			assertFalse( article.getAttribute("class").contains("starred") );
+			
+			removePage(id, title);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			fail();
+		}
+	}
 }
